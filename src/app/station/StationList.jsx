@@ -9,7 +9,7 @@ export default function StationList() {
         async function fetchStations() {
             try {
                 const res = await fetch("/api/stations");
-                if (!res.ok) throw new Error("Ошибка при загрузке");
+                if (!res.ok) throw new Error("Error while loading");
                 const data = await res.json();
                 setStations(data);
             } catch (err) {
@@ -20,16 +20,20 @@ export default function StationList() {
         fetchStations();
     }, []);
 
-    if (error) return <p>Ошибка: {error}</p>;
+    if (error) return <p>Error: {error}</p>;
 
     return (
         <div className="flex flex-col gap-3 m-5">
-            <h2 className="text-2xl">Список станций</h2>
-            {stations.length === 0 && <p>Нет станций</p>}
+            <h2 className="text-2xl">Station List</h2>
+            {stations.length === 0 && <p>No stations</p>}
             <ul className="list-disc pl-5">
                 {stations.map((station) => (
                     <li key={station._id}>
-                        {station.name} — {station.latitude}, {station.longitude}
+                        <span>
+                            {station.name} — {station.latitude},{" "}
+                            {station.longitude}
+                        </span>{" "}
+                        <br /> <span>{station.aqi}</span>
                     </li>
                 ))}
             </ul>
