@@ -3,7 +3,6 @@ import Station from "../../../models/station.js";
 
 export async function POST(req) {
     const body = await req.json();
-    // { latitude: ..., longitude: ..., aqi: ... }
 
     await connectToDB();
     const newStation = await Station.create(body);
@@ -16,9 +15,9 @@ export async function GET() {
         const stations = await Station.find({});
         return Response.json(stations);
     } catch (error) {
-        console.error("Ошибка при получении станций:", error);
+        console.error("Error fetching stations:", error);
         return new Response(
-            JSON.stringify({ error: "Не удалось получить станции" }),
+            JSON.stringify({ error: "Failed to fetch stations" }),
             { status: 500 }
         );
     }
