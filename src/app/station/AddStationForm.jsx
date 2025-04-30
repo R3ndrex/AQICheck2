@@ -22,12 +22,11 @@ export default function AddStationForm() {
             }
 
             const result = await res.json();
-            alert("Станция добавлена!");
             setName("");
             setLatitude("");
             setLongitude("");
         } catch (err) {
-            alert("Ошибка: " + err.message);
+            alert("Error: " + err.message);
         }
     }
 
@@ -35,19 +34,19 @@ export default function AddStationForm() {
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
             <input
                 type="text"
-                placeholder="Название станции"
+                placeholder="Station name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
             />
             <input
                 type="number"
-                placeholder="Широта"
+                placeholder="Latitude"
                 value={latitude}
                 onChange={(e) => setLatitude(e.target.value)}
             />
             <input
                 type="number"
-                placeholder="Долгота"
+                placeholder="Longitude"
                 value={longitude}
                 onChange={(e) => setLongitude(e.target.value)}
             />
@@ -58,7 +57,7 @@ export default function AddStationForm() {
                 onChange={(e) => setAqi(e.target.value)}
             />
             <button className="cursor-pointer" type="submit">
-                Добавить станцию
+                Add station
             </button>
         </form>
     );
