@@ -1,26 +1,85 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+.burger {
+    > * {
+        border-top: 1px solid black;
+    }
+}
+
+#root {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+input {
+    border-bottom: 1px solid gray;
+}
+.map {
+    margin-top: 2.5rem;
+    border: 1px solid black;
+    aspect-ratio: 1/1;
+    height: 90%;
+}
+.mapmain {
+    height: 80vh;
+}
+aside {
+    border-left: 1px solid black;
+    li {
+        transition: transform 0.1s;
+    }
+    li:hover {
+        transform: scale(1.1);
+    }
+}
+
+.graph {
+    width: 90%;
+    height: 500px;
+}
+
+.loader {
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 8px solid;
+    border-color: #000 #0000;
+    animation: l1 1s infinite;
+}
+@keyframes l1 {
+    to {
+        transform: rotate(0.5turn);
+    }
+}
+@media screen and (width<1500px) {
+    aside {
+        border-left: none;
+        height: max-content;
+        width: 100%;
+        ul {
+            flex-direction: row;
+        }
+        li {
+            margin: 0;
+        }
+    }
+    .mapmain {
+        margin-top: 2.5rem;
+    }
+    header {
+        margin-top: 2.5rem;
+    }
+}
+@media screen and (width<1000px) {
+    .graph {
+        height: 300px;
+    }
+    .map {
+        aspect-ratio: 3/4;
+    }
 }
