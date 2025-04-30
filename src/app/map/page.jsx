@@ -1,6 +1,8 @@
 "use client";
 import { useUserLocation } from "../context/UserLocationContext";
-import Map from "./Map";
+import dynamic from "next/dynamic";
+const Map = dynamic(() => import("./Map"), { ssr: false });
+
 const DEFAULT_POSITION = [51.5074, -0.1278]; // London
 
 export default function MapPage() {
