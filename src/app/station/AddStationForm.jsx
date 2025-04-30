@@ -18,7 +18,7 @@ export default function AddStationForm() {
 
             if (!res.ok) {
                 const text = await res.text();
-                throw new Error("Ошибка сервера: " + text);
+                throw new Error("Server error: " + text);
             }
 
             const result = await res.json();
