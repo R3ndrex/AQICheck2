@@ -26,14 +26,15 @@ export default function StationList() {
         <div className="flex flex-col gap-3 m-5">
             <h2 className="text-2xl">Station List</h2>
             {stations.length === 0 && <p>No stations</p>}
-            <ul className="list-disc pl-5">
+            <ul className="">
                 {stations.map((station) => (
                     <li key={station._id}>
+                        <h2 className="capitalize">{station.name}</h2>
                         <span>
-                            {station.name} — {station.latitude},{" "}
-                            {station.longitude}
-                        </span>{" "}
-                        <br /> <span>{station.aqi}</span>
+                            {station.latitude}, {station.longitude}
+                        </span>
+                        <br />
+                        AQI: <span>{station.aqi}</span>
                     </li>
                 ))}
             </ul>
