@@ -64,7 +64,9 @@ export default function RootLayout({ children }) {
                             <li>
                                 <Link href="/map">Map</Link>
                             </li>
-                            <li></li>
+                            <li>
+                                <Link href="/station">Add Station</Link>
+                            </li>
                         </ul>
                     </aside>
                 </div>
