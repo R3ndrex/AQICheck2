@@ -13,7 +13,12 @@ export default function AddStationForm() {
             const res = await fetch("/api/stations", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, latitude, longitude, aqi }),
+                body: JSON.stringify({
+                    name,
+                    lat: latitude,
+                    lon: longitude,
+                    aqi,
+                }),
             });
 
             if (!res.ok) {
