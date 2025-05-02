@@ -31,7 +31,7 @@ export default function StationList() {
                     <li key={station._id}>
                         <h2 className="capitalize">{station.name}</h2>
                         <span>
-                            {station.latitude}, {station.longitude}
+                            Longitude:{station.lat}, Latitude:{station.lon}
                         </span>
                         <br />
                         AQI: <span>{station.aqi}</span>
