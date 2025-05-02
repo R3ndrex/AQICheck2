@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const StationSchema = new mongoose.Schema({
     name: { type: String, required: true },
-    latitude: { type: Number, required: true },
-    longitude: { type: Number, required: true },
+    lat: { type: Number, required: true },
+    lon: { type: Number, required: true },
     aqi: { type: Number, required: true },
 });
 

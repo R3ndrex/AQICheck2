@@ -67,8 +67,8 @@ export async function POST(req) {
             console.log("Creating new station...");
             const newStation = await Station.create({
                 name: body.name,
-                latitude: body.latitude || 0,
-                longitude: body.longitude || 0,
+                lat: body.lat || 0,
+                lon: body.lon || 0,
                 aqi: aqi,
             });
 
