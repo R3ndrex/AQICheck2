@@ -61,7 +61,10 @@ export default function AddStationForm() {
                 value={aqi}
                 onChange={(e) => setAqi(e.target.value)}
             />
-            <button className="cursor-pointer" type="submit">
+            <button
+                className="pb-2 pt-2 pl-3 pr-3 cursor-pointer border-1 bg-emerald-200"
+                type="submit"
+            >
                 Add station
             </button>
         </form>
