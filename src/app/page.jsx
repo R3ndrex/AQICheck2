@@ -80,14 +80,14 @@ function MainPage() {
                 />
                 <div className="flex gap-5">
                     <button
-                        className="cursor-pointer"
+                        className="pb-2 mt-3 pt-2 pl-3 pr-3 cursor-pointer border-1 bg-emerald-200"
                         type="submit"
                         onClick={handleSubmit}
                     >
                         Get data
                     </button>
                     <button
-                        className="cursor-pointer"
+                        className="pb-2 mt-3 pt-2 pl-3 pr-3 cursor-pointer border-1 bg-emerald-200"
                         onClick={handleSubmitExact}
                     >
                         Get exact data
