@@ -2,7 +2,7 @@ import AddStationForm from "./AddStationForm";
 import StationList from "./StationList";
 export default function AddStationPage() {
     return (
-        <main className="flex flex-col justify-center items-center m-5">
+        <main className="flex flex-col justify-center items-center mt-9">
             <h1 className="text-2xl">Stations</h1>
             <AddStationForm />
             <StationList />
