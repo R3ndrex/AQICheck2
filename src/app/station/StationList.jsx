@@ -23,21 +23,40 @@ export default function StationList() {
     if (error) return <p>Error: {error}</p>;
 
     return (
-        <div className="flex flex-col gap-3 m-5">
-            <h2 className="text-2xl">Station List</h2>
-            {stations.length === 0 && <p>No stations</p>}
-            <ul>
-                {stations.map((station) => (
-                    <li key={station._id}>
-                        <h2 className="capitalize">{station.name}</h2>
-                        <span>
-                            Longitude:{station.lat}, Latitude:{station.lon}
-                        </span>
-                        <br />
-                        AQI: <span>{station.aqi}</span>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <section className="m-5">
+            <h2 className="text-2xl mb-4">Station List</h2>
+            {stations.length === 0 ? (
+                <p>No stations</p>
+            ) : (
+                <table className="w-full border border-gray-300">
+                    <thead className="bg-gray-100">
+                        <tr>
+                            <th className="border p-2 text-left">Name</th>
+                            <th className="border p-2 text-left">Longitude</th>
+                            <th className="border p-2 text-left">Latitude</th>
+                            <th className="border p-2 text-left">AQI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {stations.map((station) => (
+                            <tr key={station._id}>
+                                <td className="border p-2 capitalize">
+                                    {station.name}
+                                </td>
+                                <td className="border p-2">{station.lon}</td>
+                                <td className="border p-2">{station.lat}</td>
+                                <td className="border p-2">{station.aqi}</td>
+                            </tr>
+                        ))}
+                        <tr>
+                            <td className="border p-2">&nbsp;</td>
+                            <td className="border p-2">&nbsp;</td>
+                            <td className="border p-2">&nbsp;</td>
+                            <td className="border p-2">&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            )}
+        </section>
     );
 }
