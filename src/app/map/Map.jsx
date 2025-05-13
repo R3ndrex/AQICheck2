@@ -8,6 +8,7 @@ import {
     useMapEvents,
 } from "react-leaflet";
 import L from "leaflet";
+import AQILegend from "./AQILegend";
 import "leaflet/dist/leaflet.css";
 
 export default function Map({ position }) {
@@ -211,6 +212,7 @@ export default function Map({ position }) {
                     </Marker>
                 );
             })}
+            <AQILegend />
         </MapContainer>
     );
 }
