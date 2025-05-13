@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-
+import { getAQILevel } from "../map/AQILegend";
 export default function StationList() {
     const [stations, setStations] = useState([]);
     const [error, setError] = useState(null);
@@ -45,7 +45,16 @@ export default function StationList() {
                                 </td>
                                 <td className="border p-2">{station.lon}</td>
                                 <td className="border p-2">{station.lat}</td>
-                                <td className="border p-2">{station.aqi}</td>
+                                <td className="border p-2">
+                                    <span
+                                        style={{
+                                            color: getAQILevel(station.aqi)
+                                                .color,
+                                        }}
+                                    >
+                                        {station.aqi}
+                                    </span>
+                                </td>
                             </tr>
                         ))}
                         <tr>
