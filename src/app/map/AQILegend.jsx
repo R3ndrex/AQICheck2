@@ -1,7 +1,7 @@
 const levels = [
     { color: "#009966", label: "Good (0–50)" },
     { color: "#ffde33", label: "Moderate (51–100)" },
-    { color: "#ff9933", label: "Unhealthy for Sensitive Groups (101–150)" },
+    { color: "#ff9933", label: "Unhealthy for Sensitive (101–150)" },
     { color: "#cc0033", label: "Unhealthy (151–200)" },
     { color: "#660099", label: "Very Unhealthy (201–300)" },
     { color: "#7e0023", label: "Hazardous (301+)" },
