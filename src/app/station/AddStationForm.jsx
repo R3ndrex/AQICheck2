@@ -37,6 +37,7 @@ export default function AddStationForm() {
 
     return (
         <form onSubmit={handleSubmit} className="flex m-5 flex-col gap-3">
+            <h1 className="text-2xl mb-4">Create Station</h1>
             <input
                 type="text"
                 placeholder="Station name"
