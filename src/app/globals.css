@@ -9,7 +9,7 @@ body {
 }
 .burger {
     > * {
-        border-top: 1px solid black;
+        border-top: 3px solid black;
     }
 }
 
@@ -22,15 +22,17 @@ input {
     border-bottom: 1px solid gray;
 }
 .map {
+    z-index: 0;
     margin-top: 2.5rem;
     border: 1px solid black;
     aspect-ratio: 1/1;
-    height: 90%;
+    width: 100%;
 }
 .mapmain {
     height: 80vh;
 }
 aside {
+    z-index: 1;
     border-left: 1px solid black;
     li {
         transition: transform 0.1s;
@@ -70,6 +72,9 @@ aside {
             margin: 0;
         }
     }
+    .burger {
+        margin-top: 0.5rem;
+    }
     .mapmain {
         margin-top: 2.5rem;
     }
@@ -78,6 +83,9 @@ aside {
     }
 }
 @media screen and (width<1000px) {
+    :root {
+        font-size: 0.9rem;
+    }
     .graph {
         height: 300px;
     }
