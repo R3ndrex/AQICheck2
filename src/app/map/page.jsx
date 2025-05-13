@@ -10,7 +10,7 @@ export default function MapPage() {
     const { longitude, latitude } = context;
     return (
         <main className="flex mapmain flex-col gap-5 justify-center items-center mt-5">
-            <section className="flex h-[90%] flex-col justify-center items-center">
+            <section className="flex h-[90%] flex-col w-full justify-center items-center">
                 <h2 className="text-2xl capitalize">Air Quality Index</h2>
                 <Map
                     key={`${longitude} ${latitude}`}
