@@ -43,12 +43,12 @@ export default function RootLayout({ children }) {
                         {children}
                     </UserLocationContext>
                     <button
-                        className="burger cursor-pointer m-5 mt-1 absolute top-0 right-0 w-[3rem] h-[3rem]"
+                        className="burger cursor-pointer m-5 mt-5 absolute top-0 right-0 w-[2.5rem] h-[2.5rem]"
                         onClick={() => setVisible((prev) => !prev)}
                     >
-                        <div className="h-[1rem]"></div>
-                        <div className="h-[1rem]"></div>
-                        <div className="h-[1rem]"></div>
+                        <div className="h-[0.75rem]"></div>
+                        <div className="h-[0.75rem]"></div>
+                        <div className="h-[0.75rem]"></div>
                     </button>
 
                     <aside
