@@ -29,7 +29,7 @@ export default function StationList() {
                 <p>No stations</p>
             ) : (
                 <table className="w-full border border-gray-300">
-                    <thead className="bg-gray-100">
+                    <thead className="bg-emerald-100">
                         <tr>
                             <th className="border p-2 text-left">Name</th>
                             <th className="border p-2 text-left">Longitude</th>
