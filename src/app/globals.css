@@ -19,7 +19,8 @@ body {
     position: relative;
 }
 input {
-    border-bottom: 1px solid gray;
+    border: 1px solid gray;
+    padding: 0.5rem 0.75rem;
 }
 .map {
     z-index: 0;
@@ -71,9 +72,6 @@ aside {
         li {
             margin: 0;
         }
-    }
-    .burger {
-        margin-top: 0.5rem;
     }
     .mapmain {
         margin-top: 2.5rem;
