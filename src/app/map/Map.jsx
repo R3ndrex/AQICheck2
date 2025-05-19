@@ -69,7 +69,7 @@ export default function Map({ position }) {
                         setStations(combinedStations);
                     })
                     .catch((error) => {
-                        console.error("Ошибка при обновлении карты:", error);
+                        console.error("Error while updating map:", error);
                     });
             },
         });
