@@ -41,7 +41,7 @@ function MainPage() {
             .finally(() => setLoading(false));
     }
 
-    function handleSubmitExact() {
+    function handleGeoSubmit() {
         setError(null);
         setData(null);
         setLoading(true);
@@ -88,7 +88,7 @@ function MainPage() {
                     </button>
                     <button
                         className="pb-2 mt-3 pt-2 pl-3 pr-3 cursor-pointer border-1 bg-emerald-200"
-                        onClick={handleSubmitExact}
+                        onClick={handleGeoSubmit}
                     >
                         Get exact data
                     </button>
