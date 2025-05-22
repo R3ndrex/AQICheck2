@@ -94,7 +94,14 @@ function MainPage() {
                     </button>
                 </div>
             </header>
-
+            {!error && !data && !loading && (
+                <div className="text-gray-300 text-center text-xl mt-10">
+                    <p>
+                        No data to display. Enter city name or press «Get exact
+                        data».
+                    </p>
+                </div>
+            )}
             {error && (
                 <h2 className="text-2xl text-red-500 mt-5 flex items-center justify-center">
                     Error: {error}
