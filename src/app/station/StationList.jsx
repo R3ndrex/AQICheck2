@@ -47,6 +47,7 @@ export default function StationList() {
                                 <td className="border p-2">{station.lat}</td>
                                 <td className="border p-2">
                                     <span
+                                        className="font-semibold"
                                         style={{
                                             color: getAQILevel(station.aqi)
                                                 .color,
