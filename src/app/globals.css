@@ -12,7 +12,12 @@ body {
         border-top: 3px solid black;
     }
 }
-
+button:hover {
+    filter: brightness(90%);
+}
+button:focus {
+    filter: brightness(105%);
+}
 #root {
     height: 100%;
     width: 100%;
