@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import AQIHistoricalChart from "../AQIHistoricalChart";
 import { useRouter, useParams } from "next/navigation";
-
+import Link from "next/link";
 export default function StationsPage() {
     const router = useRouter();
     const params = useParams();
@@ -40,12 +40,12 @@ export default function StationsPage() {
     if (stationId && !selectedStation && stations.length > 0) {
         return (
             <main className="m-5">
-                <button
-                    className="mb-4 text-blue-600 font-semibold cursor-pointer"
-                    onClick={() => router.push("/stations")}
+                <Link
+                    href="/stations"
+                    className="mb-4 text-blue-600 font-semibold cursor-pointer self-start"
                 >
                     Go back to station list
-                </button>
+                </Link>
                 <p>Station not found</p>
             </main>
         );
@@ -54,12 +54,12 @@ export default function StationsPage() {
     if (stationId && selectedStation) {
         return (
             <main className="m-5 flex flex-col items-center">
-                <button
-                    className="mb-4 self-start text-blue-600 font-semibold cursor-pointer"
-                    onClick={() => router.push("/stations")}
+                <Link
+                    href="/stations"
+                    className="mb-4 text-blue-600 font-semibold cursor-pointer self-start"
                 >
                     Go back to station list
-                </button>
+                </Link>
                 <h1 className="text-3xl mb-3 capitalize">
                     {selectedStation.name}
                 </h1>
