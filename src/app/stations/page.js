@@ -77,6 +77,12 @@ export default function StationsListPage() {
                                     </td>
                                 </tr>
                             ))}
+                            <tr>
+                                <td className="border p-2">&nbsp;</td>
+                                <td className="border p-2">&nbsp;</td>
+                                <td className="border p-2">&nbsp;</td>
+                                <td className="border p-2">&nbsp;</td>
+                            </tr>
                         </tbody>
                     </table>
                 )}
