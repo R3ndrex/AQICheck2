@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import AQIHistoricalChart from "../AQIHistoricalChart";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
+import { getAQILevel } from "@/app/map/AQILegend";
 export default function StationsPage() {
     const router = useRouter();
     const params = useParams();
@@ -65,7 +66,17 @@ export default function StationsPage() {
                 </h1>
                 <p>Longitude: {selectedStation.lon}</p>
                 <p>Latitude: {selectedStation.lat}</p>
-                <p>AQI: {selectedStation.aqi}</p>
+                <p>
+                    AQI:{" "}
+                    <span
+                        className="font-semibold"
+                        style={{
+                            color: getAQILevel(selectedStation.aqi).color,
+                        }}
+                    >
+                        {selectedStation.aqi}
+                    </span>
+                </p>
 
                 <section className="mt-6 w-[90%] flex flex-col items-center">
                     <AQIHistoricalChart data={selectedStation} />
