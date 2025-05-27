@@ -21,9 +21,6 @@ export default function OpenWeatherChart({ data, pollutant, color }) {
 
     return (
         <div className="graph h-[350px]">
-            <h2 className="text-lg font-semibold mb-2 capitalize">
-                {pollutant}
-            </h2>
             <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={chartData}>
                     <CartesianGrid strokeDasharray="3 3" />
@@ -32,7 +29,6 @@ export default function OpenWeatherChart({ data, pollutant, color }) {
                         tickFormatter={formatDate}
                         interval="preserveStartEnd"
                     />
-                    <YAxis />
                     <Tooltip
                         labelFormatter={(label) => {
                             return new Date(label).toLocaleString();
