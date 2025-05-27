@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import AddStationForm from "./AddStationForm";
 import { useRouter } from "next/navigation";
-
+import { getAQILevel } from "../map/AQILegend";
 export default function StationsListPage() {
     const router = useRouter();
 
@@ -28,7 +28,13 @@ export default function StationsListPage() {
         fetchStations();
     }, []);
 
-    if (loading) return <p>Loading...</p>;
+    if (loading)
+        return (
+            <div className="flex mt-5 items-center w-[full] h-[90vh] justify-center">
+                <div className="loader"></div>
+            </div>
+        );
+
     if (error) return <p>Error: {error}</p>;
 
     return (
@@ -73,7 +79,14 @@ export default function StationsListPage() {
                                         {station.lat}
                                     </td>
                                     <td className="border p-2 font-semibold">
-                                        {station.aqi}
+                                        <span
+                                            style={{
+                                                color: getAQILevel(station.aqi)
+                                                    .color,
+                                            }}
+                                        >
+                                            {station.aqi}
+                                        </span>
                                     </td>
                                 </tr>
                             ))}
