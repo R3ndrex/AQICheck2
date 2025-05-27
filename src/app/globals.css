@@ -43,7 +43,7 @@ aside {
 }
 
 .graph {
-    width: 90%;
+    width: 100%;
 }
 
 .loader {
@@ -72,9 +72,6 @@ aside {
         }
     }
     .mapmain {
-        margin-top: 2.5rem;
-    }
-    header {
         margin-top: 2.5rem;
     }
 }
