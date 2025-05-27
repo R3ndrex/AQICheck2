@@ -1,17 +1,17 @@
 import OpenWeatherChart from "./OpenWeatherChart";
 
-export default function OpenWeatherForecast({ data }) {
-    const pollutants = {
-        co: "#8884d8",
-        no: "#82ca9d",
-        no2: "#ffc658",
-        o3: "#ff7300",
-        so2: "#a4de6c",
-        pm2_5: "#d0ed57",
-        pm10: "#8dd1e1",
-        nh3: "#888888",
-    };
+const pollutants = {
+    co: "#8884d8",
+    no: "#82ca9d",
+    no2: "#ffc658",
+    o3: "#ff7300",
+    so2: "#a4de6c",
+    pm2_5: "#d0ed57",
+    pm10: "#8dd1e1",
+    nh3: "#888888",
+};
 
+export default function OpenWeatherForecast({ data }) {
     return (
         <>
             {Object.entries(pollutants).map(([pollutant, color]) => (
