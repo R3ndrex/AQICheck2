@@ -1,4 +1,5 @@
 "use client";
+
 import "./globals.css";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -42,6 +43,7 @@ export default function RootLayout({ children }) {
                     <UserLocationContext value={userLocation}>
                         {children}
                     </UserLocationContext>
+
                     <button
                         className="burger cursor-pointer m-5 mt-[0.5rem] absolute top-0 right-0 w-[2.5rem] h-[2.5rem]"
                         onClick={() => setVisible((prev) => !prev)}
@@ -59,13 +61,28 @@ export default function RootLayout({ children }) {
                     >
                         <ul className="flex flex-col items-center gap-5">
                             <li className="mt-8">
-                                <Link href="/">Main Page</Link>
+                                <Link
+                                    href="/"
+                                    onClick={() => setVisible((prev) => !prev)}
+                                >
+                                    Main Page
+                                </Link>
                             </li>
                             <li>
-                                <Link href="/map">Map</Link>
+                                <Link
+                                    href="/map"
+                                    onClick={() => setVisible((prev) => !prev)}
+                                >
+                                    Map
+                                </Link>
                             </li>
                             <li>
-                                <Link href="/stations">Add Station</Link>
+                                <Link
+                                    href="/stations"
+                                    onClick={() => setVisible((prev) => !prev)}
+                                >
+                                    Add Station
+                                </Link>
                             </li>
                         </ul>
                     </aside>
