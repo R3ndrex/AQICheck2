@@ -4,8 +4,9 @@ import "./globals.css";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { UserLocationContext } from "./context/UserLocationContext";
-
+import { usePathname } from "next/navigation";
 export default function RootLayout({ children }) {
+    const pathname = usePathname();
     const ref = useRef();
     const [visible, setVisible] = useState(false);
     const [userLocation, setUserLocation] = useState(null);
@@ -60,28 +61,79 @@ export default function RootLayout({ children }) {
                         }`}
                     >
                         <ul className="flex flex-col items-center gap-5">
-                            <li className="mt-8">
+                            <li
+                                className={`mt-8 transform duration-500 ${
+                                    pathname === "/"
+                                        ? "scale-115"
+                                        : "hover:scale-125"
+                                }`}
+                            >
                                 <Link
                                     href="/"
-                                    onClick={() => setVisible((prev) => !prev)}
+                                    onClick={(e) => {
+                                        if (pathname === "/") {
+                                            e.preventDefault();
+                                        } else {
+                                            setVisible((prev) => !prev);
+                                        }
+                                    }}
+                                    className={`hover:underline ${
+                                        pathname === "/"
+                                            ? "text-gray-700 font-semibold pointer-events-none"
+                                            : "text-black"
+                                    }`}
                                 >
-                                    Main Page
+                                    Main
                                 </Link>
                             </li>
-                            <li>
+                            <li
+                                className={`transform duration-500 ${
+                                    pathname === "/map"
+                                        ? "scale-115"
+                                        : "hover:scale-125"
+                                }`}
+                            >
                                 <Link
                                     href="/map"
-                                    onClick={() => setVisible((prev) => !prev)}
+                                    onClick={(e) => {
+                                        if (pathname === "/map") {
+                                            e.preventDefault();
+                                        } else {
+                                            setVisible((prev) => !prev);
+                                        }
+                                    }}
+                                    className={`hover:underline ${
+                                        pathname === "/map"
+                                            ? "text-gray-700 font-semibold pointer-events-none"
+                                            : "text-black"
+                                    }`}
                                 >
                                     Map
                                 </Link>
                             </li>
-                            <li>
+                            <li
+                                className={`transform duration-500 ${
+                                    pathname === "/stations"
+                                        ? "scale-115"
+                                        : "hover:scale-125"
+                                }`}
+                            >
                                 <Link
                                     href="/stations"
-                                    onClick={() => setVisible((prev) => !prev)}
+                                    onClick={(e) => {
+                                        if (pathname === "/stations") {
+                                            e.preventDefault();
+                                        } else {
+                                            setVisible((prev) => !prev);
+                                        }
+                                    }}
+                                    className={`hover:underline ${
+                                        pathname === "/stations"
+                                            ? "text-gray-600 font-semibold pointer-events-none"
+                                            : "text-black"
+                                    }`}
                                 >
-                                    Add Station
+                                    Stations
                                 </Link>
                             </li>
                         </ul>
