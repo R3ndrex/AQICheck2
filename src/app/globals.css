@@ -66,6 +66,10 @@ aside {
         width: 100%;
         ul {
             flex-direction: row;
+            justify-content: center;
+        }
+        li:first-of-type {
+            margin-right: auto;
         }
         li {
             margin: 0;

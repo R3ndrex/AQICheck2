@@ -1,8 +1,19 @@
 import { connectToDB } from "../../../lib/mongodb.js";
 import Station from "../../../models/station.js";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/route";
 
 export async function POST(req) {
     try {
+        const session = await getServerSession(authOptions);
+        console.log(session);
+        if (!session) {
+            return new Response(JSON.stringify({ error: "Unauthorized" }), {
+                status: 401,
+                headers: { "Content-Type": "application/json" },
+            });
+        }
+
         const body = await req.json();
 
         if (!body.name) {
@@ -35,7 +46,9 @@ export async function POST(req) {
                 name: body.name,
                 lat: body.lat || 0,
                 lon: body.lon || 0,
+                aqi: aqi,
                 aqiHistory: [{ aqi, recordedAt: new Date() }],
+                createdBy: session.user.email,
             });
 
             return new Response(

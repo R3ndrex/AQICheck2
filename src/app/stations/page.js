@@ -81,11 +81,20 @@ export default function StationsListPage() {
                                     <td className="border p-2 font-semibold">
                                         <span
                                             style={{
-                                                color: getAQILevel(station.aqi)
-                                                    .color,
+                                                color: getAQILevel(
+                                                    station.aqiHistory[
+                                                        station.aqiHistory
+                                                            .length - 1
+                                                    ].aqi
+                                                ).color,
                                             }}
                                         >
-                                            {station.aqi}
+                                            {
+                                                station.aqiHistory[
+                                                    station.aqiHistory.length -
+                                                        1
+                                                ].aqi
+                                            }
                                         </span>
                                     </td>
                                 </tr>

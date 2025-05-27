@@ -4,6 +4,11 @@ const StationSchema = new mongoose.Schema({
     name: { type: String, required: true },
     lat: { type: Number, required: true },
     lon: { type: Number, required: true },
+    createdBy: {
+        type: String,
+        ref: "User",
+        required: true,
+    },
     aqiHistory: [
         {
             aqi: { type: Number, required: true },
