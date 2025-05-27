@@ -6,15 +6,10 @@ import {
     Tooltip,
     ResponsiveContainer,
 } from "recharts";
-function formatDate(date) {
-    const newDate = new Date(date);
-    return `${String(newDate.getMonth() + 1).padStart(2, "0")}.${String(
-        newDate.getDate()
-    ).padStart(2, "0")}`;
-}
+import formatDate from "./utils/formatDate";
 export default function PollutionChart({ data, dataKeys }) {
     return (
-        <div className="graph">
+        <div className="graph h-[500px]">
             <ResponsiveContainer>
                 <LineChart data={data}>
                     {dataKeys.map((key) => (
