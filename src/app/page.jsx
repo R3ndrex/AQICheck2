@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useUserLocation } from "./context/UserLocationContext";
 import DataSection from "./DataSection.jsx";
 import isCityReal from "./utils/isCityReal";
-
+import Template from "./template";
 function MainPage() {
     const [inputValue, setInputValue] = useState("");
     const [data, setData] = useState(null);
@@ -82,10 +82,20 @@ function MainPage() {
             setError("Browser doesn't support geolocation");
         }
     }
-
+    if (loading) {
+        return (
+            <div className="flex h-[90vh] items-center justify-center">
+                <div className="loader"></div>
+            </div>
+        );
+    }
     return (
         <>
-            <header className="flex flex-col justify-center items-center m-5">
+            <header
+                className={`flex flex-col justify-center items-center m-5 ${
+                    data || loading || error ? "mt-9" : "mt-[33vh]"
+                }`}
+            >
                 <h1 className="text-2xl">AQI Check</h1>
                 <input
                     type="text"
@@ -114,8 +124,9 @@ function MainPage() {
                     </button>
                 </div>
             </header>
+
             {!error && !data && !loading && (
-                <div className="text-gray-300 text-center text-xl mt-10">
+                <div className="text-gray-300 text-center text-xl mt-7">
                     <p>
                         No data to display. Enter city name or press «Get exact
                         data».
@@ -127,11 +138,10 @@ function MainPage() {
                     Error: {error}
                 </h2>
             )}
-            {data && <DataSection data={data} />}
-            {loading && (
-                <div className="flex mt-5 items-center justify-center">
-                    <div className="loader"></div>
-                </div>
+            {data && (
+                <Template>
+                    <DataSection data={data} />
+                </Template>
             )}
         </>
     );
