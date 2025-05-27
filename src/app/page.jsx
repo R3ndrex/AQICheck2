@@ -3,23 +3,7 @@
 import { useState } from "react";
 import { useUserLocation } from "./context/UserLocationContext";
 import DataSection from "./DataSection.jsx";
-
-function isCityReal(lat, lon, city) {
-    fetch(
-        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&accept-language=en`
-    )
-        .then((response) => response.json())
-        .then((data) => {
-            const realCity =
-                data.address.city || data.address.town || data.address.village;
-            console.log(data.address.city);
-            if (city !== realCity) {
-                return false;
-            }
-            return true;
-        })
-        .catch((error) => console.error("Error in reverse geocoding:", error));
-}
+import isCityReal from "./utils/isCityReal";
 
 function MainPage() {
     const [inputValue, setInputValue] = useState("");
@@ -77,13 +61,10 @@ function MainPage() {
                         setError(null);
                     } else {
                         fetch(
-                            `https://api.openweathermap.org/data/2.5/air_pollution?lat=${userLocation.latitude}&lon=${userLocation.longitude}&appid=${process.env.OPEN_WEATHER_TOKEN}`
+                            `http://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${userLocation.latitude}&lon=${userLocation.longitude}&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_TOKEN}`
                         )
                             .then((response) =>
                                 response.json().then((data) => {
-                                    console.log(data);
-                                    console.log(userLocation.latitude);
-                                    console.log(userLocation.longitude);
                                     setData(data);
                                     setError(null);
                                 })
