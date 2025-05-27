@@ -20,7 +20,7 @@ export default function StationsPage() {
         async function fetchStations() {
             try {
                 const res = await fetch("/api/stations");
-                if (!res.ok) throw new Error("Ошибка загрузки станций");
+                if (!res.ok) throw new Error("Error loading stations");
                 const data = await res.json();
                 setStations(data);
                 console.log(data);
@@ -40,12 +40,12 @@ export default function StationsPage() {
                 method: "DELETE",
             });
 
-            if (!res.ok) throw new Error("Ошибка при удалении станции");
+            if (!res.ok) throw new Error("Error while deleting station");
 
             setStations((prev) => prev.filter((s) => s._id !== id));
             router.push("/stations");
         } catch (err) {
-            alert("Ошибка: " + err.message);
+            alert("Error: " + err.message);
         }
     };
 
@@ -75,7 +75,7 @@ export default function StationsPage() {
             <main className="m-5 flex flex-col items-center">
                 <Link
                     href="/stations"
-                    className="text-blue-600 font-semibold mb-4"
+                    className="text-blue-600 self-start font-semibold mb-4"
                 >
                     Go back to station list
                 </Link>
