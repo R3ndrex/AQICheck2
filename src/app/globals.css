@@ -40,12 +40,6 @@ input {
 aside {
     z-index: 1;
     border-left: 1px solid black;
-    li {
-        transition: transform 0.1s;
-    }
-    li:hover {
-        transform: scale(1.1);
-    }
 }
 
 .graph {
