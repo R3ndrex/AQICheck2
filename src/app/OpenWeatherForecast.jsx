@@ -21,7 +21,7 @@ export default function OpenWeatherForecast({ data }) {
                             {pollutant} Forecast
                         </h2>
                         <OpenWeatherChart
-                            key={pollutant}
+                            key={data.list.dt}
                             data={data}
                             pollutant={pollutant}
                             color={color}
