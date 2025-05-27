@@ -4,6 +4,23 @@ import { useState } from "react";
 import { useUserLocation } from "./context/UserLocationContext";
 import DataSection from "./DataSection.jsx";
 
+function isCityReal(lat, lon, city) {
+    fetch(
+        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&accept-language=en`
+    )
+        .then((response) => response.json())
+        .then((data) => {
+            const realCity =
+                data.address.city || data.address.town || data.address.village;
+            console.log(data.address.city);
+            if (city !== realCity) {
+                return false;
+            }
+            return true;
+        })
+        .catch((error) => console.error("Error in reverse geocoding:", error));
+}
+
 function MainPage() {
     const [inputValue, setInputValue] = useState("");
     const [data, setData] = useState(null);
@@ -49,8 +66,30 @@ function MainPage() {
         if (userLocation) {
             fetchData(`geo:${userLocation.latitude};${userLocation.longitude}`)
                 .then((response) => {
-                    setData(response);
-                    setError(null);
+                    if (
+                        isCityReal(
+                            userLocation.latitude,
+                            userLocation.longitude,
+                            response.data.city.name
+                        )
+                    ) {
+                        setData(response);
+                        setError(null);
+                    } else {
+                        fetch(
+                            `https://api.openweathermap.org/data/2.5/air_pollution?lat=${userLocation.latitude}&lon=${userLocation.longitude}&appid=${process.env.OPEN_WEATHER_TOKEN}`
+                        )
+                            .then((response) =>
+                                response.json().then((data) => {
+                                    console.log(data);
+                                    console.log(userLocation.latitude);
+                                    console.log(userLocation.longitude);
+                                    setData(data);
+                                    setError(null);
+                                })
+                            )
+                            .catch((error) => setError(error.message));
+                    }
                 })
                 .catch((error) => {
                     if (error.name !== "AbortError") setError(error.message);
