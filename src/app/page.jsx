@@ -61,7 +61,7 @@ function MainPage() {
                         setError(null);
                     } else {
                         fetch(
-                            `http://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${userLocation.latitude}&lon=${userLocation.longitude}&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_TOKEN}`
+                            `https://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${userLocation.latitude}&lon=${userLocation.longitude}&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_TOKEN}`
                         )
                             .then((response) =>
                                 response.json().then((data) => {
