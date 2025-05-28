@@ -111,13 +111,17 @@ export default function Map({ position }) {
             {stations.map((station) => {
                 const isLocal = !!station._id && !station.uid;
                 const markerKey = station.uid || station._id;
-
+                const aqiValue = isLocal
+                    ? station.aqiHistory?.[station.aqiHistory.length - 1]?.aqi
+                    : station.aqi;
                 return (
                     <Marker
                         key={markerKey}
                         position={[station.lat, station.lon]}
                         icon={L.icon({
-                            iconUrl: `https://waqi.info/mapicon/${station.aqi}.30.png`,
+                            iconUrl: aqiValue
+                                ? `https://waqi.info/mapicon/${aqiValue}.30.png`
+                                : `https://waqi.info/mapicon/undefined.30.png`,
                             iconSize: [40, 40],
                             iconAnchor: [20, 40],
                         })}
@@ -132,7 +136,12 @@ export default function Map({ position }) {
                                 <div style={{ minWidth: "200px" }}>
                                     <b>{station.name}</b>
                                     <br />
-                                    <b>AQI:</b> {station.aqi}
+                                    <b>AQI:</b>{" "}
+                                    {
+                                        station.aqiHistory[
+                                            station.aqiHistory.length - 1
+                                        ].aqi
+                                    }
                                     <br />
                                     <b>Latitude:</b> {station.lat}
                                     <br />
