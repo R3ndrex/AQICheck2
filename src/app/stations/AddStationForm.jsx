@@ -30,6 +30,7 @@ export default function AddStationForm() {
             setName("");
             setLatitude("");
             setLongitude("");
+            setAqi("");
         } catch (err) {
             alert("Error: " + err.message);
         }
