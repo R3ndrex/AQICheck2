@@ -15,25 +15,24 @@ export default function LoginPage() {
             const res = await signIn("credentials", {
                 email,
                 password,
-                redirect: false,
+                callbackUrl: "/",
             });
             if (res.error) {
                 setError("Invalid credentials");
                 return;
             }
-            router.replace("/");
         } catch (e) {
             console.error(e);
         }
     }
     return (
-        <main className="flex flex-wrap justify-center items-top mt-9">
+        <main className="flex flex-wrap justify-center items-top mt-14">
             <section className="m-5">
                 <form
                     className="flex flex-col gap-5"
                     onSubmit={(e) => handleSubmit(e)}
                 >
-                    <h1>Enter details</h1>
+                    <h1 className="text-2xl">Enter details</h1>
                     <input
                         type="text"
                         value={email}
