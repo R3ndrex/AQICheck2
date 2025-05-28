@@ -91,10 +91,11 @@ export default function StationsPage() {
                         }
                     </span>
                 </p>
-                <h1 className="text-xl mb-2">
-                    Station ID: {selectedStation._id}
-                </h1>
-
+                {isOwner && (
+                    <h1 className="text-xl mb-2">
+                        Station ID: {selectedStation._id}
+                    </h1>
+                )}
                 {isOwner && (
                     <button
                         onClick={() => handleDelete(selectedStation._id)}
