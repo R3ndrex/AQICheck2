@@ -38,7 +38,7 @@ export default function StationsListPage() {
     if (error) return <p>Error: {error}</p>;
 
     return (
-        <main className="flex flex-wrap justify-center items-top mt-9">
+        <main className="flex flex-wrap justify-center items-top mt-14">
             <AddStationForm />
             <section className="m-5">
                 <h2 className="text-2xl mb-4">Station List</h2>

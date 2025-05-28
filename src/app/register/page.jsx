@@ -51,13 +51,13 @@ export default function RegisterPage() {
         }
     }
     return (
-        <main className="flex flex-wrap justify-center items-top mt-9">
+        <main className="flex flex-wrap justify-center items-top mt-14">
             <section className="m-5">
                 <form
                     className="flex flex-col gap-5"
                     onSubmit={(e) => handleSubmit(e)}
                 >
-                    <h1>Register</h1>
+                    <h1 className="text-2xl">Register</h1>
                     <input
                         type="text"
                         value={name}

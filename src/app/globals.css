@@ -67,9 +67,17 @@ aside {
         ul {
             flex-direction: row;
             justify-content: center;
+            padding-bottom: 0.4rem;
         }
-        li:first-of-type {
-            margin-right: auto;
+        ul ul li:first-of-type {
+            display: none;
+        }
+        ul ul {
+            margin: 0;
+            gap: 0.5rem;
+        }
+        ul ul button {
+            margin: 0;
         }
         li {
             margin: 0;
