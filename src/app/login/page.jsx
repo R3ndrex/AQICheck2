@@ -48,7 +48,7 @@ export default function LoginPage() {
                             Email
                         </label>
                         <input
-                            className="text-xl"
+                            className="p-1 text-xl placeholder-slate-400"
                             type="text"
                             value={email}
                             placeholder="Email"
@@ -65,7 +65,7 @@ export default function LoginPage() {
                         </label>
                         <input
                             type="password"
-                            className="text-xl"
+                            className="p-1 text-xl placeholder-slate-400"
                             value={password}
                             placeholder="Password"
                             id="password"
@@ -80,7 +80,7 @@ export default function LoginPage() {
                         Login
                     </button>
                     <Link
-                        className="text-emerald-500 font-semibold"
+                        className="text-emerald-500 font-semibold animated-underline"
                         href={"/register"}
                     >
                         Dont have an account?

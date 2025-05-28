@@ -98,3 +98,23 @@ aside {
         aspect-ratio: 3/4;
     }
 }
+.animated-underline {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.animated-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: currentColor;
+    transition: width 0.3s ease;
+}
+
+.animated-underline:hover::after {
+    width: 100%;
+}
