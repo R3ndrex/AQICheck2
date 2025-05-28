@@ -49,7 +49,7 @@ export default function Layout({ children }) {
 
             <aside
                 ref={ref}
-                className={`fixed h-[100%] text-2xl top-0 right-0 p-1 bg-emerald-200 w-[25%] ease-in-out duration-[1s] transition ${
+                className={`fixed h-[100%] text-2xl top-0 right-0 p-1 bg-emerald-200 w-[25%] ease-in-out duration-[0.75s] transition ${
                     visible ? "translate-x-0" : "translate-x-full"
                 }`}
             >
@@ -109,7 +109,7 @@ export default function Layout({ children }) {
                     )}
                     <li
                         className={`transform duration-500 ${
-                            pathname === "/" ? "scale-115" : "hover:scale-125"
+                            pathname === "/" ? "underline" : ""
                         }`}
                     >
                         <Link
@@ -121,9 +121,9 @@ export default function Layout({ children }) {
                                     setVisible((prev) => !prev);
                                 }
                             }}
-                            className={`hover:underline ${
+                            className={`animated-underline ${
                                 pathname === "/"
-                                    ? "text-gray-700 font-semibold pointer-events-none"
+                                    ? "font-semibold pointer-events-none"
                                     : "text-black"
                             }`}
                         >
@@ -132,9 +132,7 @@ export default function Layout({ children }) {
                     </li>
                     <li
                         className={`transform duration-500 ${
-                            pathname === "/map"
-                                ? "scale-115"
-                                : "hover:scale-125"
+                            pathname === "/map" ? "underline" : ""
                         }`}
                     >
                         <Link
@@ -146,9 +144,9 @@ export default function Layout({ children }) {
                                     setVisible((prev) => !prev);
                                 }
                             }}
-                            className={`hover:underline ${
+                            className={`animated-underline ${
                                 pathname === "/map"
-                                    ? "text-gray-700 font-semibold pointer-events-none"
+                                    ? "font-semibold pointer-events-none"
                                     : "text-black"
                             }`}
                         >
@@ -157,9 +155,7 @@ export default function Layout({ children }) {
                     </li>
                     <li
                         className={`transform duration-500 ${
-                            pathname === "/stations"
-                                ? "scale-115"
-                                : "hover:scale-125"
+                            pathname === "/stations" ? "underline" : ""
                         }`}
                     >
                         <Link
@@ -171,9 +167,9 @@ export default function Layout({ children }) {
                                     setVisible((prev) => !prev);
                                 }
                             }}
-                            className={`hover:underline ${
+                            className={`animated-underline ${
                                 pathname === "/stations"
-                                    ? "text-gray-600 font-semibold pointer-events-none"
+                                    ? "font-semibold pointer-events-none"
                                     : "text-black"
                             }`}
                         >
