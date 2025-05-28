@@ -67,7 +67,7 @@ export default function RegisterPage() {
                             Name
                         </label>
                         <input
-                            className="text-xl"
+                            className="p-1 text-xl placeholder-slate-400"
                             type="text"
                             value={name}
                             placeholder="Name"
@@ -83,7 +83,7 @@ export default function RegisterPage() {
                             Email
                         </label>
                         <input
-                            className="text-xl"
+                            className="p-1 text-xl placeholder-slate-400"
                             type="text"
                             value={email}
                             placeholder="Email"
@@ -99,7 +99,7 @@ export default function RegisterPage() {
                             Password
                         </label>
                         <input
-                            className="text-xl"
+                            className="p-1 text-xl placeholder-slate-400"
                             type="password"
                             value={password}
                             placeholder="Password"
@@ -115,7 +115,7 @@ export default function RegisterPage() {
                         Create account
                     </button>
                     <Link
-                        className="text-emerald-500 font-semibold"
+                        className="text-emerald-500 font-semibold animated-underline"
                         href={"/login"}
                     >
                         Already have an account?

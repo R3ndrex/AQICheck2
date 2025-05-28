@@ -104,7 +104,7 @@ function MainPage() {
                     id="city"
                     placeholder="Enter your city"
                     autoFocus
-                    className="p-1"
+                    className="placeholder-slate-400 p-1"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                 />

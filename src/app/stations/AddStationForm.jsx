@@ -42,23 +42,27 @@ export default function AddStationForm() {
             <input
                 type="text"
                 placeholder="Station name"
+                className="placeholder-slate-400 p-1"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
             />
             <input
-                type="number"
+                type="tel"
+                className="placeholder-slate-400 p-1"
                 placeholder="Latitude"
                 value={latitude}
                 onChange={(e) => setLatitude(e.target.value)}
             />
             <input
-                type="number"
+                type="tel"
+                className="placeholder-slate-400 p-1"
                 placeholder="Longitude"
                 value={longitude}
                 onChange={(e) => setLongitude(e.target.value)}
             />
             <input
-                type="number"
+                type="tel"
+                className="placeholder-slate-400 p-1"
                 placeholder="AQI"
                 value={aqi}
                 onChange={(e) => setAqi(e.target.value)}
