@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 export default function LoginPage() {
     const router = useRouter();
     const [email, setEmail] = useState("");
@@ -35,30 +36,56 @@ export default function LoginPage() {
         <main className="flex flex-wrap justify-center items-top mt-14">
             <section className="m-5">
                 <form
-                    className="flex flex-col gap-5"
+                    className="flex flex-col gap-5 bg-white pt-8  pb-8 pl-12 pr-12 shadow-[0_10px_25px_rgba(0,0,0,0.1)] text-center"
                     onSubmit={(e) => handleSubmit(e)}
                 >
                     <h1 className="text-2xl">Enter details</h1>
-                    <input
-                        type="text"
-                        value={email}
-                        placeholder="Email"
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <input
-                        type="password"
-                        value={password}
-                        placeholder="Password"
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
+                    <div className="flex flex-col items-start">
+                        <label
+                            htmlFor="email"
+                            className="text-gray-500 font-semibold"
+                        >
+                            Email
+                        </label>
+                        <input
+                            className="text-xl"
+                            type="text"
+                            value={email}
+                            placeholder="Email"
+                            id="email"
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <div className="flex flex-col items-start mb-4">
+                        <label
+                            htmlFor="password"
+                            className="text-gray-500 font-semibold"
+                        >
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            className="text-xl"
+                            value={password}
+                            placeholder="Password"
+                            id="password"
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        {error && <div className="text-red-500">{error}</div>}
+                    </div>
                     <button
                         type="submit"
-                        className="pb-2 mt-3 pt-2 pl-3 pr-3 cursor-pointer border-1 bg-emerald-200"
+                        className="pb-2 pt-2 pl-3 pr-3 cursor-pointer border-1 bg-emerald-200"
                     >
                         Login
                     </button>
+                    <Link
+                        className="text-emerald-500 font-semibold"
+                        href={"/register"}
+                    >
+                        Dont have an account?
+                    </Link>
                 </form>
-                {error && <div className="text-red-500">{error}</div>}
             </section>
         </main>
     );
