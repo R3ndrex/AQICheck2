@@ -29,7 +29,7 @@ export default function LoginPage() {
             }
         } catch (e) {
             console.error("Login error:", e);
-            setError("Something went wrong. Please try again.");
+            setError("Something went wrong. Try again.");
         }
     }
     return (
