@@ -9,20 +9,26 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
     async function handleSubmit(e) {
-        setError("");
         e.preventDefault();
+        setError("");
+
         try {
             const res = await signIn("credentials", {
+                redirect: false,
                 email,
                 password,
                 callbackUrl: "/",
             });
+
             if (res.error) {
-                setError("Invalid credentials");
-                return;
+                console.log("Invalid credentials");
+                setError("Invalid email or password");
+            } else {
+                router.push(res.url || "/");
             }
         } catch (e) {
-            console.error(e);
+            console.error("Login error:", e);
+            setError("Something went wrong. Please try again.");
         }
     }
     return (
