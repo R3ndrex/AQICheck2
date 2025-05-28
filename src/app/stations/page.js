@@ -61,12 +61,12 @@ export default function StationsListPage() {
                             </tr>
                         </thead>
                         <tbody>
-                            {stations.map((station) => (
+                            {stations.map((station, index) => (
                                 <tr
                                     key={station._id}
                                     className="align-top cursor-pointer hover:bg-gray-100"
                                     onClick={() =>
-                                        router.push(`/stations/${station._id}`)
+                                        router.push(`/stations/${index}`)
                                     }
                                 >
                                     <td className="border p-2 capitalize">

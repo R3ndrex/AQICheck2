@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import AQIHistoricalChart from "../AQIHistoricalChart";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import AQIHistoricalChart from "../AQIHistoricalChart";
 import { getAQILevel } from "@/app/map/AQILegend";
 export default function StationsPage() {
     const router = useRouter();
     const params = useParams();
     const { data: session } = useSession();
-    const stationId = params?.id;
+    const stationIndex = parseInt(params?.id); // теперь это индекс, а не _id
 
     const [stations, setStations] = useState([]);
     const [error, setError] = useState(null);
@@ -23,7 +23,6 @@ export default function StationsPage() {
                 if (!res.ok) throw new Error("Error loading stations");
                 const data = await res.json();
                 setStations(data);
-                console.log(data);
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -52,34 +51,22 @@ export default function StationsPage() {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
 
-    const selectedStation = stationId
-        ? stations.find((s) => s._id === stationId)
-        : null;
-    if (stationId && !selectedStation && stations.length > 0) {
-        return (
-            <main className="m-5">
-                <Link
-                    href="/stations"
-                    className="mb-4 text-blue-600 font-semibold cursor-pointer self-start"
-                >
-                    Go back to station list
-                </Link>
-                <p>Station not found</p>
-            </main>
-        );
-    }
-    if (stationId && selectedStation) {
+    const selectedStation =
+        stationIndex >= 0 && stationIndex < stations.length
+            ? stations[stationIndex]
+            : null;
+
+    if (selectedStation) {
         const isOwner = session?.user?.email === selectedStation.createdBy;
 
         return (
             <main className="m-5 flex flex-col items-center">
                 <Link
                     href="/stations"
-                    className="text-blue-600 self-start font-semibold mb-4"
+                    className="text-blue-600 font-semibold self-start mb-4"
                 >
                     Go back to station list
                 </Link>
-
                 <h1 className="text-3xl mb-3 capitalize">
                     {selectedStation.name}
                 </h1>
@@ -104,20 +91,34 @@ export default function StationsPage() {
                         }
                     </span>
                 </p>
+                <h1 className="text-xl mb-2">
+                    Station ID: {selectedStation._id}
+                </h1>
 
                 {isOwner && (
                     <button
                         onClick={() => handleDelete(selectedStation._id)}
-                        className="mt-5 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
                     >
-                        Удалить станцию
+                        Delete station
                     </button>
                 )}
-
                 <section className="mt-6 w-[90%] flex flex-col items-center">
                     <AQIHistoricalChart data={selectedStation} />
                 </section>
             </main>
         );
     }
+
+    return (
+        <main className="m-5">
+            <Link
+                href="/stations"
+                className="text-blue-600 font-semibold mb-4 block"
+            >
+                Go back to station list
+            </Link>
+            <p>Station not found</p>
+        </main>
+    );
 }
