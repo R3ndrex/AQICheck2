@@ -137,14 +137,14 @@ export default function StationsPage() {
                             <div className="flex gap-2 mb-4 mt-4">
                                 <input
                                     type="tel"
-                                    className="p-1 text-xl"
+                                    className="p-1 text-lg placeholder-slate-400"
                                     value={newAQI}
                                     onChange={(e) => setNewAQI(e.target.value)}
                                     placeholder="Enter new AQI"
                                 />
                                 <button
                                     onClick={handleUpdateAQI}
-                                    className="pb-2 pt-2 pl-3 pr-3 cursor-pointer border-1 bg-emerald-200"
+                                    className="pb-2 pt-2 pl-3 pr-3 cursor-pointer border-1 text-lg bg-emerald-200"
                                 >
                                     Update AQI
                                 </button>
@@ -153,7 +153,7 @@ export default function StationsPage() {
                     )}
                 </div>
 
-                <section className="mt-6 w-[90%] flex flex-col items-center">
+                <section className="mt-6 w-full flex flex-col items-center">
                     <AQIHistoricalChart data={selectedStation} />
                 </section>
             </main>
