@@ -45,10 +45,10 @@ export default function RegisterPage() {
                 setName("");
                 router.push("/login");
             } else {
-                console.log("User registration failed");
+                setError("User registration failed");
             }
         } catch (error) {
-            console.log("Error during registration: ", error);
+            setError("Error during registration: ", error);
         }
     }
     return (
@@ -106,10 +106,10 @@ export default function RegisterPage() {
                             id="password"
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        {error && <div className="text-red-500">{error}</div>}
+                        <div className="text-red-500 h-[2ch]">{error}</div>
                     </div>
                     <button
-                        className="pb-2 mt-3 pt-2 pl-3 pr-3 cursor-pointer border-1 bg-emerald-200"
+                        className="pb-2 pt-2 pl-3 pr-3 cursor-pointer border-1 bg-emerald-200"
                         type="submit"
                     >
                         Create account

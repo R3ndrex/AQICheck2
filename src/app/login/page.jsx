@@ -71,7 +71,7 @@ export default function LoginPage() {
                             id="password"
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        {error && <div className="text-red-500">{error}</div>}
+                        <div className="text-red-500 h-[2ch]">{error}</div>
                     </div>
                     <button
                         type="submit"
