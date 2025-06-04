@@ -12,6 +12,11 @@ body {
         border-top: 3px solid black;
     }
 }
+button,
+input {
+    font-family: inherit;
+}
+
 button:hover {
     filter: brightness(90%);
 }
