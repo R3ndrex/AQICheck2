@@ -45,10 +45,11 @@ export default function RegisterPage() {
                 setName("");
                 router.push("/login");
             } else {
-                setError("User registration failed");
+                setError("Invalid email or password");
             }
         } catch (error) {
-            setError("Error during registration: ", error);
+            console.error("Error during registration: ", error);
+            setError("Something went wrong. Try again.");
         }
     }
     return (
