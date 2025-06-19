@@ -50,17 +50,17 @@ function MainPage() {
             }
 
             const today = new Date().toISOString().split("T")[0];
-            const pm10Forecast = waqiData?.data?.forecast?.daily?.pm10?.[0];
+            const pm10Array = waqiData?.data?.forecast?.daily?.pm10;
 
-            const isToday = pm10Forecast && pm10Forecast.day === today;
-
-            if (isToday) {
+            const hasTodayData =
+                Array.isArray(pm10Array) &&
+                pm10Array.some((item) => item.day === today);
+            if (hasTodayData) {
                 setData({
                     source: "waqi",
                     payload: waqiData,
                 });
             } else {
-                // fallback to OpenWeather
                 const [lat, lon] = waqiData?.data?.city?.geo || [];
 
                 if (!lat || !lon)
