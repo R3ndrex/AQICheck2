@@ -11,7 +11,7 @@ export default function DataSection({ data, source }) {
         const DailyArray = Object.entries(data.data.forecast.daily);
         return (
             <main className="flex gap-5 flex-col items-center m-5">
-                <section>
+                <section className="flex flex-col items-center">
                     <h1 className="text-2xl">{data.data.city.name}</h1>
                     <p>
                         AQI:{" "}
@@ -24,6 +24,7 @@ export default function DataSection({ data, source }) {
                             {data.data.aqi}
                         </span>
                     </p>
+                    <p>{getAQILevel(data.data.aqi).text}</p>
                 </section>
                 {DailyArray.map(([pollutionName, pollutionValue]) => (
                     <PollutionForecast
@@ -43,7 +44,7 @@ export default function DataSection({ data, source }) {
     ) {
         return (
             <main className="flex gap-5 flex-col items-center m-5">
-                <section>
+                <section className="flex flex-col items-center">
                     <h1 className="text-2xl">{city}</h1>
                     <p>
                         AQI:{" "}
@@ -56,6 +57,7 @@ export default function DataSection({ data, source }) {
                             {data.list[0].main.aqi}
                         </span>
                     </p>
+                    <p>{getAQILevel(data.list[0].main.aqi).text}</p>
                 </section>
                 <OpenWeatherForecast data={data} />
             </main>
