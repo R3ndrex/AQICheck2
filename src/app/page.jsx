@@ -145,7 +145,7 @@ function MainPage() {
     return (
         <>
             <header
-                className={`flex flex-col justify-center items-center m-5 ${
+                className={`flex flex-col justify-center items-center m-5 main-header ${
                     data || loading || error ? "mt-9" : "mt-[33vh]"
                 }`}
             >
