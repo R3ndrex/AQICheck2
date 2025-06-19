@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useUserLocation } from "./context/UserLocationContext";
 import DataSection from "./DataSection.jsx";
 import isCityReal from "./utils/isCityReal";
@@ -11,9 +11,16 @@ function MainPage() {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+    const ref = useRef();
     const userLocation = useUserLocation();
 
     const today = new Date().toISOString().split("T")[0];
+
+    useEffect(() => {
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") ref.current?.focus();
+        });
+    }, []);
 
     async function fetchData(request) {
         const response = await fetch(
@@ -90,6 +97,7 @@ function MainPage() {
             setLoading(false);
         }
     }
+    useEffect(() => {}, []);
 
     function handleGeoSubmit() {
         setError(null);
@@ -156,6 +164,7 @@ function MainPage() {
                     name="city"
                     id="city"
                     placeholder="Enter your city"
+                    ref={ref}
                     autoFocus
                     className="placeholder-slate-400 p-1"
                     value={inputValue}
