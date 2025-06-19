@@ -11,7 +11,7 @@ export default function MapPage() {
     return (
         <main className="flex mapmain flex-col gap-5 min-h-[95vh] justify-center items-center mt-5">
             <section className="flex h-[90%] flex-col w-full justify-center items-center">
-                <h2 className="text-2xl capitalize">Air Quality Index</h2>
+                <h2 className="text-2xl capitalize">Air Quality Index Map</h2>
                 <Map
                     key={`${longitude} ${latitude}`}
                     position={
