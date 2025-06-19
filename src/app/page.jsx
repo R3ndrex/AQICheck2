@@ -5,6 +5,7 @@ import { useUserLocation } from "./context/UserLocationContext";
 import DataSection from "./DataSection.jsx";
 import isCityReal from "./utils/isCityReal";
 import Template from "./template";
+import cityList from "./utils/cities.json";
 
 function MainPage() {
     const [inputValue, setInputValue] = useState("");
@@ -12,6 +13,7 @@ function MainPage() {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const ref = useRef();
+    const [suggestions, setSuggestions] = useState([]);
     const userLocation = useUserLocation();
 
     const today = new Date().toISOString().split("T")[0];
@@ -158,28 +160,60 @@ function MainPage() {
                 }`}
             >
                 <h1 className="text-2xl">AQI Check</h1>
-                <input
-                    type="text"
-                    required
-                    name="city"
-                    id="city"
-                    placeholder="Enter your city"
-                    ref={ref}
-                    autoFocus
-                    className="placeholder-slate-400 p-1"
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                />
+                <div className="flex flex-col m-3">
+                    <input
+                        type="text"
+                        required
+                        name="city"
+                        id="city"
+                        placeholder="Enter your city"
+                        ref={ref}
+                        autoFocus
+                        className="placeholder-slate-400 p-1"
+                        value={inputValue}
+                        onChange={(e) => {
+                            const value = e.target.value;
+                            setInputValue(value);
+
+                            if (value.length > 0) {
+                                const filtered = cityList
+                                    .filter((city) =>
+                                        city.name
+                                            .toLowerCase()
+                                            .startsWith(value.toLowerCase())
+                                    )
+                                    .slice(0, 5);
+                                setSuggestions(filtered);
+                            } else {
+                                setSuggestions([]);
+                            }
+                        }}
+                    />
+                    <ul className="bg-white text-black w-[300px] mt-1 max-h-[150px] overflow-y-auto rounded shadow suggestions">
+                        {suggestions.map((city) => (
+                            <li
+                                key={city.id}
+                                className="p-2 hover:bg-emerald-100 cursor-pointer"
+                                onClick={() => {
+                                    setInputValue(city.name);
+                                    setSuggestions([]);
+                                }}
+                            >
+                                {city.name}, {city.country}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
                 <div className="flex gap-5">
                     <button
-                        className="pb-2 mt-3 pt-2 pl-3 pr-3 cursor-pointer border-1 bg-emerald-200"
+                        className="pb-2 pt-2 pl-3 pr-3 cursor-pointer border-1 bg-emerald-200"
                         type="submit"
                         onClick={handleSubmit}
                     >
                         Get data
                     </button>
                     <button
-                        className="pb-2 mt-3 pt-2 pl-3 pr-3 cursor-pointer border-1 bg-emerald-200"
+                        className="pb-2 pt-2 pl-3 pr-3 cursor-pointer border-1 bg-emerald-200"
                         onClick={handleGeoSubmit}
                     >
                         Get geo data
