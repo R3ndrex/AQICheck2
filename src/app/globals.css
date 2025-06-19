@@ -102,6 +102,9 @@ aside {
         margin-top: 8rem;
     }
 }
+.suggestions {
+    overflow: hidden;
+}
 @media screen and (width<1000px) {
     :root {
         font-size: 0.9rem;
