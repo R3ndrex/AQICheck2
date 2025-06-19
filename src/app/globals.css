@@ -64,15 +64,22 @@ aside {
         transform: rotate(0.5turn);
     }
 }
+
 @media screen and (width<1500px) {
     aside {
         border-left: none;
         height: max-content;
         width: 100%;
         ul {
+            font-size: 1rem;
             flex-direction: row;
             justify-content: center;
+            align-items: center;
             padding-bottom: 0.4rem;
+            padding-top: 0.4rem;
+        }
+        button {
+            font-size: 1rem;
         }
         ul ul li:first-of-type {
             display: none;
@@ -90,6 +97,9 @@ aside {
     }
     .mapmain {
         margin-top: 2.5rem;
+    }
+    .main-header {
+        margin-top: 8rem;
     }
 }
 @media screen and (width<1000px) {
