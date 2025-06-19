@@ -5,12 +5,15 @@ import { useUserLocation } from "./context/UserLocationContext";
 import DataSection from "./DataSection.jsx";
 import isCityReal from "./utils/isCityReal";
 import Template from "./template";
+
 function MainPage() {
     const [inputValue, setInputValue] = useState("");
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const userLocation = useUserLocation();
+
+    const today = new Date().toISOString().split("T")[0];
 
     async function fetchData(request) {
         const response = await fetch(
@@ -26,20 +29,66 @@ function MainPage() {
         return json;
     }
 
-    function handleSubmit() {
+    async function handleSubmit() {
         setError(null);
         setData(null);
         setLoading(true);
-        fetchData(inputValue)
-            .then((response) => {
-                setData(response);
-                setError(null);
-            })
-            .catch((error) => {
-                if (error.name !== "AbortError") setError(error.message);
-                setData(null);
-            })
-            .finally(() => setLoading(false));
+
+        try {
+            const response = await fetch(
+                `https://api.waqi.info/feed/${inputValue}/?token=${process.env.NEXT_PUBLIC_TOKEN}`
+            );
+
+            if (!response.ok) {
+                throw new Error("There is a problem with fetching WAQI data");
+            }
+
+            const waqiData = await response.json();
+
+            if (waqiData.status === "error") {
+                throw new Error(waqiData.data);
+            }
+
+            const today = new Date().toISOString().split("T")[0];
+            const pm10Forecast = waqiData?.data?.forecast?.daily?.pm10?.[0];
+
+            const isToday = pm10Forecast && pm10Forecast.day === today;
+
+            if (isToday) {
+                setData({
+                    source: "waqi",
+                    payload: waqiData,
+                });
+            } else {
+                // fallback to OpenWeather
+                const [lat, lon] = waqiData?.data?.city?.geo || [];
+
+                if (!lat || !lon)
+                    throw new Error("Coordinates not found for OpenWeather");
+
+                const openWeatherResponse = await fetch(
+                    `https://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${lat}&lon=${lon}&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_TOKEN}`
+                );
+
+                if (!openWeatherResponse.ok) {
+                    throw new Error("Failed to fetch OpenWeather data");
+                }
+
+                const openWeatherData = await openWeatherResponse.json();
+
+                setData({
+                    source: "openweather",
+                    payload: openWeatherData,
+                });
+            }
+        } catch (error) {
+            if (error.name !== "AbortError") {
+                setError(error.message);
+            }
+            setData(null);
+        } finally {
+            setLoading(false);
+        }
     }
 
     function handleGeoSubmit() {
@@ -50,22 +99,32 @@ function MainPage() {
         if (userLocation) {
             fetchData(`geo:${userLocation.latitude};${userLocation.longitude}`)
                 .then((response) => {
-                    if (
-                        isCityReal(
-                            userLocation.latitude,
-                            userLocation.longitude,
-                            response.data.city.name
-                        )
-                    ) {
-                        setData(response);
+                    const isReal = isCityReal(
+                        userLocation.latitude,
+                        userLocation.longitude,
+                        response.data.city.name
+                    );
+
+                    const pm10Forecast =
+                        response?.data?.forecast?.daily?.pm10?.[0];
+                    const isToday = pm10Forecast && pm10Forecast.day === today;
+
+                    if (isReal && isToday) {
+                        setData({
+                            source: "waqi",
+                            payload: response,
+                        });
                         setError(null);
                     } else {
                         fetch(
                             `https://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${userLocation.latitude}&lon=${userLocation.longitude}&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_TOKEN}`
                         )
                             .then((response) =>
-                                response.json().then((data) => {
-                                    setData(data);
+                                response.json().then((openWeatherData) => {
+                                    setData({
+                                        source: "openweather",
+                                        payload: openWeatherData,
+                                    });
                                     setError(null);
                                 })
                             )
@@ -82,13 +141,7 @@ function MainPage() {
             setError("Browser doesn't support geolocation");
         }
     }
-    if (loading) {
-        return (
-            <div className="flex h-[90vh] items-center justify-center">
-                <div className="loader"></div>
-            </div>
-        );
-    }
+
     return (
         <>
             <header
@@ -120,7 +173,7 @@ function MainPage() {
                         className="pb-2 mt-3 pt-2 pl-3 pr-3 cursor-pointer border-1 bg-emerald-200"
                         onClick={handleGeoSubmit}
                     >
-                        Get exact data
+                        Get geo data
                     </button>
                 </div>
             </header>
@@ -140,7 +193,7 @@ function MainPage() {
             )}
             {data && (
                 <Template>
-                    <DataSection data={data} />
+                    <DataSection data={data.payload} source={data.source} />
                 </Template>
             )}
         </>
