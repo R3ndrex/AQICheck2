@@ -156,7 +156,7 @@ function MainPage() {
         <>
             <header
                 className={`flex flex-col justify-center items-center m-5 main-header ${
-                    data || loading || error ? "mt-9" : "mt-[33vh]"
+                    (data && !loading) || error ? "mt-9" : "mt-[33vh]"
                 }`}
             >
                 <h1 className="text-2xl">AQI Check</h1>
