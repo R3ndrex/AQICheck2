@@ -15,6 +15,7 @@ function MainPage() {
     const ref = useRef();
     const [suggestions, setSuggestions] = useState([]);
     const userLocation = useUserLocation();
+    const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
 
     const today = new Date().toISOString().split("T")[0];
 
@@ -97,9 +98,9 @@ function MainPage() {
             setData(null);
         } finally {
             setLoading(false);
+            setHasLoadedOnce(true);
         }
     }
-    useEffect(() => {}, []);
 
     function handleGeoSubmit() {
         setError(null);
@@ -145,7 +146,10 @@ function MainPage() {
                     if (error.name !== "AbortError") setError(error.message);
                     setData(null);
                 })
-                .finally(() => setLoading(false));
+                .finally(() => {
+                    setLoading(false);
+                    setHasLoadedOnce(true);
+                });
         } else {
             setLoading(false);
             setError("Browser doesn't support geolocation");
@@ -156,7 +160,9 @@ function MainPage() {
         <>
             <header
                 className={`flex flex-col justify-center items-center m-5 main-header ${
-                    (data && !loading) || error ? "mt-9" : "mt-[33vh]"
+                    (data && !loading) || error || hasLoadedOnce
+                        ? "mt-9"
+                        : "mt-[33vh]"
                 }`}
             >
                 <h1 className="text-2xl">AQI Check</h1>
